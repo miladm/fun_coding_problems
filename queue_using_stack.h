@@ -12,26 +12,26 @@ class queue : public stack {
         queue () {}
         ~queue () {}
 
-        void push_back (int elem) {
-            _in.push_back (elem);
+        void push (int elem) {
+            _in.push (elem);
         }
 
-        int pop_front () {
+        int pop () {
             in_to_out_swap ();
-            int front = _out.pop_back ();
+            int front = _out.pop ();
             out_to_in_swap ();
             return front;
         }
 
         int front () {
             in_to_out_swap ();
-            int front = _out.back ();
+            int front = _out.top ();
             out_to_in_swap ();
             return front;
         }
 
         int back () {
-            return _in.back ();
+            return _in.top ();
         }
 
         bool empty () {
@@ -48,19 +48,19 @@ class queue : public stack {
         void out_to_in_swap () {
             stack<int>::iterator it;
             for (it = _out.begin (); it != _out.end (); it++) {
-                _in.push_back (*it);
+                _in.push(*it);
             }
             while (!_out.empty ()) {
-                _out.pop_back ();
+                _out.pop ();
             }
         }
         void in_to_out_swap () {
             stack<int>::iterator it;
             for (it = _in.begin (); it != _in.end (); it++) {
-                _out.push_back (*it);
+                _out.push (*it);
             }
             while (!_in.empty ()) {
-                _in.pop_back ();
+                _in.pop ();
             }
         }
 
